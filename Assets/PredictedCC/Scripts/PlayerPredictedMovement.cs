@@ -1,5 +1,6 @@
 ﻿using Mirror;
 using UnityEngine;
+
 namespace PredictedCharacterController.New
 {
     [RequireComponent(typeof(CharacterController), typeof(NetworkTransformBase))]

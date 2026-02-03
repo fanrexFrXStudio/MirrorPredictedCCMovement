@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8557776806899299533}
   - component: {fileID: 5330944591877303082}
   - component: {fileID: 8117907654116516228}
-  - component: {fileID: 5973527513904212559}
+  - component: {fileID: 5495796993251699435}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -113,7 +113,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5973527513904212559
+--- !u!114 &5495796993251699435
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,7 +132,7 @@ MonoBehaviour:
   jumpForce: 5
   onGroundVerticalVelocity: -1
   gravityScale: -10
-  reconcileThreshold: 0.05
+  reconcileThreshold: 0.1
 --- !u!1 &3606117898670384205
 GameObject:
   m_ObjectHideFlags: 0
