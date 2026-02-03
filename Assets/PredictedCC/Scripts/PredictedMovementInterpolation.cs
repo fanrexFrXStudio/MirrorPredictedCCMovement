@@ -19,22 +19,15 @@ namespace PredictedCharacterController.New
         [Space, SerializeField]
         private Transform visual;
 
-        [SerializeField]
-        private bool detachVisual;
-
-        private PlayerPredictedMovement movement;
-
         private void Awake()
         {
-            movement = GetComponent<PlayerPredictedMovement>();
-
-            if (!isServerOnly && detachVisual)
+            if (!isServerOnly)
                 visual.SetParent(null);
         }
 
         private void OnDestroy()
         {
-            if (!isServerOnly && detachVisual)
+            if (!isServerOnly)
                 Destroy(visual.gameObject);
         }
 
@@ -54,37 +47,24 @@ namespace PredictedCharacterController.New
                     Interpolate(observerInterpolation, observerInterpolationMultiple, observerTeleportThreshold);
             }
         }
+
         private void Interpolate(float interpolation, float multiple, float teleportThreshold)
         {
             InterpolatePosition(interpolation, multiple, teleportThreshold);
         }
+
         private void InterpolatePosition(float interpolation, float multiple, float teleportThreshold)
         {
-            if (detachVisual)
+            var distance = Vector3.Distance(visual.position, transform.position);
+
+            if (distance > teleportThreshold)
             {
-                // visual отделен от игрока — работаем в world space (оригинальная логика)
-                float distance = Vector3.Distance(visual.position, transform.position);
-                if (distance > teleportThreshold)
-                {
-                    visual.position = transform.position;
-                    return;
-                }
-                float step = (interpolation + (distance * multiple)) * Time.deltaTime;
-                visual.position = Vector3.MoveTowards(visual.position, transform.position, step);
+                visual.position = transform.position;
+                return;
             }
-            else
-            {
-                // visual прикреплен как child к transform — работаем в local space
-                // при нулевом localPosition визуал точно совпадает с parent
-                float distance = visual.localPosition.magnitude;
-                if (distance > teleportThreshold)
-                {
-                    visual.localPosition = Vector3.zero;
-                    return;
-                }
-                float step = (interpolation + (distance * multiple)) * Time.deltaTime;
-                visual.localPosition = Vector3.MoveTowards(visual.localPosition, Vector3.zero, step);
-            }
+
+            var step = (interpolation + (distance * multiple)) * Time.deltaTime;
+            visual.position = Vector3.MoveTowards(visual.position, transform.position, step);
         }
     }
 }
