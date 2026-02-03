@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace PredictedCharacterController
 {
@@ -12,6 +11,18 @@ namespace PredictedCharacterController
         {
             MoveInput = move;
             JumpPerformed = jumpPerformed;
+        }
+    }
+
+    public readonly struct MovementReplicateNetData
+    {
+        public readonly MovementInput Input;
+        public readonly uint Tick;
+
+        public MovementReplicateNetData(MovementInput input, uint tick)
+        {
+            Input = input;
+            Tick = tick;
         }
     }
 }

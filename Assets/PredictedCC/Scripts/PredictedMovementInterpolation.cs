@@ -1,6 +1,5 @@
 ﻿using Mirror;
 using UnityEngine;
-
 namespace PredictedCharacterController.New
 {
     [RequireComponent(typeof(PlayerPredictedMovement))]
@@ -40,20 +39,13 @@ namespace PredictedCharacterController.New
             {
                 if (enableOwnerInterpolation)
                     Interpolate(ownerInterpolation, ownerInterpolationMultiple, ownerTeleportThreshold);
+                return;
             }
-            else
-            {
-                if (enableObserverInterpolation)
-                    Interpolate(observerInterpolation, observerInterpolationMultiple, observerTeleportThreshold);
-            }
-        }
 
+            if (enableObserverInterpolation)
+                Interpolate(observerInterpolation, observerInterpolationMultiple, observerTeleportThreshold);
+        }
         private void Interpolate(float interpolation, float multiple, float teleportThreshold)
-        {
-            InterpolatePosition(interpolation, multiple, teleportThreshold);
-        }
-
-        private void InterpolatePosition(float interpolation, float multiple, float teleportThreshold)
         {
             var distance = Vector3.Distance(visual.position, transform.position);
 

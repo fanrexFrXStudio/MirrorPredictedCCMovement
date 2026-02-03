@@ -44,9 +44,8 @@ namespace PredictedCharacterController.New
                 var newReplicate = new MovementReplicateData(input, new(transform.position, verticalVelocity, localTick));
 
                 localBuffer.Write(newReplicate);
+                CmdBufferWriteReplicate(new(input, localTick));
                 localTick++;
-
-                CmdBufferWriteReplicate(newReplicate);
             }
 
             if (isServerOnly)
@@ -74,7 +73,11 @@ namespace PredictedCharacterController.New
         }
 
         [Command]
-        private void CmdBufferWriteReplicate(MovementReplicateData replicate) => serverBuffer.Write(replicate);
+        private void CmdBufferWriteReplicate(MovementReplicateNetData netData)
+        {
+            // на сервере Predicted не нужен, кладём default
+            serverBuffer.Write(new(netData.Input, new(default, default, netData.Tick)));
+        }
 
         [Server]
         private void ServerTick(float delta)

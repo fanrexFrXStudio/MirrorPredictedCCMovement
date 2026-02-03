@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace PredictedCharacterController
 {
-    // client send to server, to move
     public readonly struct MovementReplicateData
     {
         public readonly MovementInput Input;
@@ -10,12 +9,11 @@ namespace PredictedCharacterController
 
         public MovementReplicateData(MovementInput input, MovementReconcileData predicted)
         {
-            Input = input; 
+            Input = input;
             Predicted = predicted;
         }
     }
 
-    // server send to owner, to validate
     public readonly struct MovementReconcileData
     {
         public readonly Vector3 Position;
@@ -27,7 +25,6 @@ namespace PredictedCharacterController
         {
             Position = position;
             VerticalVelocity = verticalVelocity;
-
             Tick = tick;
         }
     }

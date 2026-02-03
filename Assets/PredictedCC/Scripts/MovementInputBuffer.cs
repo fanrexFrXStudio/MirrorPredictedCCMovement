@@ -17,7 +17,6 @@ namespace PredictedCharacterController
             if (inputsBuffer.Count > maxBufferSize)
                 inputsBuffer.RemoveAt(0);
         }
-
         public void UpdateLastPosition(int index, Vector3 newPos)
         {
             var data = inputsBuffer[index];
@@ -27,6 +26,15 @@ namespace PredictedCharacterController
         public void ClearOlder(int index) => inputsBuffer.RemoveRange(0, index + 1);
 
         public MovementReplicateData Get(int index) => inputsBuffer[index];
-        public int GetIndex(uint tick) => inputsBuffer.FindIndex(x => x.Predicted.Tick == tick);
+        public int GetIndex(uint tick)
+        {
+            for (var i = 0; i < inputsBuffer.Count; i++)
+            {
+                if (inputsBuffer[i].Predicted.Tick == tick)
+                    return i;
+            }
+
+            return -1;
+        }
     }
 }
