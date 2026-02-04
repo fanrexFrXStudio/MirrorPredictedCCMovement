@@ -73,11 +73,8 @@ namespace PredictedCharacterController.New
         }
 
         [Command]
-        private void CmdBufferWriteReplicate(MovementReplicateNetData netData)
-        {
-            // на сервере Predicted не нужен, кладём default
+        private void CmdBufferWriteReplicate(MovementReplicateNetData netData) =>
             serverBuffer.Write(new(netData.Input, new(default, default, netData.Tick)));
-        }
 
         [Server]
         private void ServerTick(float delta)
