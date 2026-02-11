@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2257472913197271601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4602892970665475158}
+  m_Layer: 3
+  m_Name: CameraPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4602892970665475158
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2257472913197271601}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6999663115220552822}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2460972053176286857
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,10 +43,12 @@ GameObject:
   - component: {fileID: 8557776806899299533}
   - component: {fileID: 5330944591877303082}
   - component: {fileID: 8117907654116516228}
-  - component: {fileID: 5495796993251699435}
-  m_Layer: 0
+  - component: {fileID: 6695951656551997540}
+  - component: {fileID: 6308153109871023529}
+  - component: {fileID: 7879901895468197154}
+  m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,7 +117,7 @@ MonoBehaviour:
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   bufferResetMultiplier: 3
   useFixedUpdate: 1
-  positionSensitivity: 0.01
+  positionSensitivity: 0.005
   rotationSensitivity: -1
   scaleSensitivity: -1
 --- !u!143 &8117907654116516228
@@ -113,7 +146,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5495796993251699435
+--- !u!114 &6695951656551997540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,17 +155,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 2460972053176286857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecfc22b286d9b5c4fbdb197ae85fb603, type: 3}
+  m_Script: {fileID: 11500000, guid: eab6ba51c68599a46adfcd7206ba1be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  moveSpeed: 5
+  orientation: {fileID: 4602892970665475158}
+  playerCamera: {fileID: 7879901895468197154}
+  canJump: 1
+  useGravity: 1
   jumpForce: 5
-  onGroundVerticalVelocity: -1
-  gravityScale: -10
-  reconcileThreshold: 0.1
+  gravity: 10
+  reconcileThreshold: 0.05
+  speed: 5
+--- !u!114 &6308153109871023529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2460972053176286857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9f28145a7ae68d4482f8bdf57bd4219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  visual: {fileID: 6999663115220552822}
+--- !u!114 &7879901895468197154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2460972053176286857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e099ed5a9388dda468c2c827da9d16c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  sensivity: 1
+  clamp: 89
+  cameraPoint: {fileID: 4602892970665475158}
+  CanLook: 1
 --- !u!1 &3606117898670384205
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,8 +215,8 @@ GameObject:
   - component: {fileID: 6999663115220552822}
   - component: {fileID: 1498987655044229324}
   - component: {fileID: 8224648340870669209}
-  m_Layer: 0
-  m_Name: Visual
+  m_Layer: 3
+  m_Name: PlayerVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,7 +234,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4602892970665475158}
   m_Father: {fileID: 4298700088273211254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1498987655044229324
